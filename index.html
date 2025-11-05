@@ -87,7 +87,7 @@
   </div>
 
 <script>
-  const DEFAULT_SECONDS = 3;
+  const DEFAULT_SECONDS = 2;
   const DEFAULT_REDIRECT = 'https://pwning.owasp-juice.shop/companion-guide/latest/index.html';
 
   const params = new URLSearchParams(location.search);
@@ -96,17 +96,22 @@
 
   function finishRedirect() {
 
-    window.location.replace(redirectUrl);
+    window.location.href = redirectUrl;
+
+    setTimeout(() => {
+      try {
+        window.location.replace(redirectUrl);
+      } catch (e) {}
+    }, 200);
   }
 
-  // Aguarda o tempo configurado e depois redireciona
+  // Aguarda o tempo configurado antes de redirecionar
   setTimeout(finishRedirect, totalSeconds * 1000);
 
-  window.history.pushState(null, null, window.location.href);
-  window.onpopstate = function () {
-    window.history.pushState(null, null, window.location.href);
-  };
-
+  window.history.pushState(null, '', window.location.href);
+  window.addEventListener('popstate', function () {
+    window.history.pushState(null, '', window.location.href);
+  });
 </script>
 </body>
 </html>
