@@ -95,13 +95,18 @@
   const totalSeconds = Math.max(1, parseInt(params.get('t')) || DEFAULT_SECONDS);
 
   function finishRedirect() {
-    // Redireciona usando location.href (mais compatível com celular)
-    window.location.href = redirectUrl;
+    
+    window.location.replace(redirectUrl);
   }
 
-  // Aguarda o tempo configurado e depois redireciona
+ 
   setTimeout(finishRedirect, totalSeconds * 1000);
-</script>
 
+  
+  window.history.pushState(null, null, window.location.href);
+  window.onpopstate = function () {
+    window.history.pushState(null, null, window.location.href);
+  };
+</script>
 </body>
 </html>
