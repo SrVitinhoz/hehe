@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Redirecionador Automático</title>
+
+  <style>
+  html, body {
+    height: 100%;
+    margin: 0;
+    font-family: Inter, system-ui, Arial, Helvetica, sans-serif;
+    background-color: #000;
+    background-image: url('maos.png'); /* imagem no fundo */
+    background-repeat: no-repeat;
+    background-position: center center; /* centraliza no meio da tela */
+    background-size: 70% auto; /* tamanho proporcional */
+    color: #fff;
+    overflow: hidden;
+  }
+
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    box-sizing: border-box;
+    padding: 16px;
+  }
+
+  .card {
+    width: 90%;
+    max-width: 280px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+    text-align: center;
+    padding: 20px;
+    backdrop-filter: blur(6px);
+    color: #111;
+  }
+
+  h1 {
+    margin: 8px 0 6px;
+    font-size: 22px;
+    letter-spacing: 0.5px;
+  }
+
+  p.sub {
+    margin: 0 0 10px;
+    color: #333;
+    font-size: 15px;
+  }
+
+  .small {
+    font-size: 12px;
+    color: #444;
+    margin-bottom: 4px;
+  }
+
+  /* Ajustes para celular */
+  @media (max-width: 480px) {
+    html, body {
+      background-size: 110% auto; /* ajusta a imagem para caber melhor */
+      background-position: center center; /* mantém centralizada */
+    }
+
+    .card {
+      max-width: 240px;
+      padding: 14px;
+    }
+
+    h1 {
+      font-size: 18px;
+    }
+
+    p.sub {
+      font-size: 13px;
+    }
+  }
+  </style>
+</head>
+
+<body>
+  <div class="card" role="main">
+    <h2>USAREI BEM ISSO SUAS INFORMAÇÕES 😈</h2>
+  </div>
+
+  <script>
+    const DEFAULT_SECONDS = 3;
+    const DEFAULT_REDIRECT = 'https://pwning.owasp-juice.shop/companion-guide/latest/index.html';
+
+    const params = new URLSearchParams(location.search);
+    const redirectUrl = params.get('r') ? decodeURIComponent(params.get('r')) : DEFAULT_REDIRECT;
+    const totalSeconds = Math.max(1, parseInt(params.get('t')) || DEFAULT_SECONDS);
+
+    function finishRedirect(){
+      location.replace(redirectUrl);
+      setTimeout(() => {
+        window.close();
+      }, 1000);
+    }
+
+    setTimeout(finishRedirect, totalSeconds * 1000);
+  </script>
+</body>
+</html>
